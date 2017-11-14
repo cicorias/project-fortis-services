@@ -21,6 +21,7 @@ function terms(args, res) { // eslint-disable-line no-unused-vars
 }
 
 function sites(args, res) { // eslint-disable-line no-unused-vars
+  
   return new Promise((resolve, reject) => {
     getSiteDefintion()
       .then(resolve)

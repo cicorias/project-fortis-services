@@ -1,5 +1,7 @@
 'use strict';
 require('dotenv').config();
+console.log(`DEBUG ${process.env.DEBUG}`);
+const debug = require('debug')('fortis:host');
 
 const port = process.env.PORT || 8000;
 
@@ -64,7 +66,7 @@ app.use('/api/settings', graphqlHTTP({
 }));
 
 function startServer() {
-  console.log(`PORT: ${port}`);
+  debug(`PORT: ${port}`);
   const server = http.createServer(app);
   server.listen(port, function () {});
 }

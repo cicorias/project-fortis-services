@@ -1,5 +1,5 @@
 'use strict';
-
+const debug = require('debug')('fortis:cassandar');
 const Promise = require('promise');
 const geotile = require('geotile');
 const isObject = require('lodash/isObject');
@@ -90,6 +90,7 @@ function transformWatchlist(item, translatedlanguage) {
 }
 
 function getSiteDefintion() {
+  debug('getting settings');
   return new Promise((resolve, reject) => {
     const siteByIdQuery = 'SELECT * FROM fortis.sitesettings';
     cassandraConnector.executeQuery(siteByIdQuery, [])
