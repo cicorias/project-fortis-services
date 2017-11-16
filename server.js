@@ -65,6 +65,26 @@ app.use('/api/settings', graphqlHTTP({
   graphiql: true
 }));
 
+/// authN *****
+/// TODO: actual implementation.
+const passport = require('passport');
+const authCheck = require('./src/authCheck');
+require('./src/passport')(passport);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/api/profile', authCheck(), (req, res) => {
+  // res.sendStatus(401);
+  // res.json({ data: { user: { firstName: 'john', lastName: 'doe', email: 'jon@doe.com'}}});
+  var user = req.session.passport;
+  res.json(user);
+});
+
+app.use('/auth', require('./src/auth'));
+
+/// authN END...  ****** 
+
 function startServer() {
   debug(`PORT: ${port}`);
   const server = http.createServer(app);
